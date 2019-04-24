@@ -18,8 +18,10 @@ public class Player : MonoBehaviour
 	// Variaveis - Vida
 	public int numVidas = 3;
     public int score = 0;
+	public int coins = 0;
     public Text txtVidas;
     public Text txtScore;
+	public Text txtCoins;
     public bool morto;
 	
     // Start is called before the first frame update
@@ -27,6 +29,7 @@ public class Player : MonoBehaviour
     {
         txtScore.text = score.ToString();
         txtVidas.text = numVidas.ToString();
+		txtCoins.text = coins.ToString();
         morto = false;
     }
 
@@ -84,8 +87,10 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision2D)
     {
+		// Verifica se está no chão
         if (collision2D.gameObject.CompareTag("Chao"))
             noChao = true;
+		// Reduz Vida na Colisão com Inimigos
         if (collision2D.gameObject.CompareTag("Enemies"))
         {
             if(numVidas > 0)
@@ -100,27 +105,45 @@ public class Player : MonoBehaviour
 
                 }
             }
-
-           
-                
         }
+		// Mata o personagem em itens de InstaDeath
         if (collision2D.gameObject.CompareTag("InstaDeath"))
-        {
-            numVidas = 0;
-            txtVidas.text = numVidas.ToString();
-            GetComponent<Animator>().SetTrigger("Morreu");
-            morto = true;
-            gameOver.SetActive(true);
-        }    
+             instaDeath();
     }
 
     void OnCollisionExit2D(Collision2D collision2D)
     {
+		// Verifica se está no chão
         if (collision2D.gameObject.CompareTag("Chao"))
             noChao = false;
     }
-
+	
+	void OnTriggerEnter2D(Collider2D collider2D){
+		// Coleta Moedas
+		if (collider2D.gameObject.CompareTag("Coletavel")){
+			Destroy(collider2D.gameObject);
+			score += 25;
+			coins++;
+			txtScore.text = score.ToString();
+			txtCoins.text = coins.ToString();
+		}
+		// Mata o personagem em itens de InstaDeath
+		if (collider2D.gameObject.CompareTag("InstaDeath"))
+            instaDeath();
+        
+	}
+	
+	// Função para matar um personagem instantâneamente
+	void instaDeath(){
+		numVidas = 0;
+        txtVidas.text = numVidas.ToString();
+        GetComponent<Animator>().SetTrigger("Morreu");
+        morto = true;
+        gameOver.SetActive(true);
+	}	
 }
+
+
 
 
 

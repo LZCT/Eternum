@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5424071639789022544}
   - component: {fileID: 5424071639789022545}
   - component: {fileID: 572624947}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Dino
   m_TagString: Enemies
   m_Icon: {fileID: 0}
