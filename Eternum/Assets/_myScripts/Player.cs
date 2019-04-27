@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
 				GetComponent<Animator>().SetBool("Andando", false);
 			
 			// Ataque
-			if(Input.GetKeyDown(KeyCode.Mouse0)){
+			if(Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.K)){
 				GetComponent<Animator>().SetTrigger("Atacando");
 				Collider2D[] colliders = new Collider2D[3];
 				if(GetComponent<SpriteRenderer>().flipX == true){
