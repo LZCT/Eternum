@@ -8,6 +8,8 @@ TagManager:
   - Enemies
   - InstaDeath
   - Coletavel
+  - Parede
+  - Portal
   layers:
   - Default
   - TransparentFX

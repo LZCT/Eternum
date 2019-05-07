@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_myScenes/Fase1_ETM.unity
     guid: d7155237cf6678742839d9827ba9c9c9
+  - enabled: 1
+    path: Assets/_myScenes/Fase2_ETM.unity
+    guid: 8f06bd59568e5da408c8b0cb65aff78d
+  - enabled: 1
+    path: Assets/_myScenes/Fase3_ETM.unity
+    guid: b42739c1e78434449baa7bf9b7a6059f
   m_configObjects: {}

@@ -7,22 +7,25 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public GameObject menuPause;
-    
+    public int level;
     private bool pausado = false;
-
+	
+	
     
 
     // Start is called before the first frame update
     void Start()
     {
-        
+		
+        pausado = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+		//gameOver.activeSelf == false)
         if (Input.GetKeyDown(KeyCode.P))
-            Pause();  
+		    Pause();  
     }
 
     public void Pause()
@@ -55,7 +58,7 @@ public class GameManager : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene("Fase1_ETM");
+        SceneManager.LoadScene("Fase" + level + "_ETM");
         menuPause.SetActive(false);
         pausado = false;
         Time.timeScale = 1;

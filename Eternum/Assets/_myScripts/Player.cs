@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Player : MonoBehaviour
 	public GameObject MenuPauseCompleto;
     public bool noChao;
 	public GameObject sangue;
+	public int level;
 	
 	// Variaveis - Movimentação
     public float forcaPulo;
@@ -93,12 +95,15 @@ public class Player : MonoBehaviour
 		// Reduz Vida na Colisão com Inimigos
         if (collision2D.gameObject.CompareTag("Enemies"))
         {
+			ShakeIt();
             if(numVidas > 0)
             {
                 numVidas--;
                 txtVidas.text = numVidas.ToString();
+				GetComponent<Animator>().SetTrigger("Hit");
                 if (numVidas == 0)
                 {
+					Instantiate(sangue, transform.position, Quaternion.identity);
                     GetComponent<Animator>().SetTrigger("Morreu");
                     morto = true;
                     gameOver.SetActive(true);
@@ -109,6 +114,8 @@ public class Player : MonoBehaviour
 		// Mata o personagem em itens de InstaDeath
         if (collision2D.gameObject.CompareTag("InstaDeath"))
              instaDeath();
+		 if (collision2D.gameObject.CompareTag("Portal"))
+            SceneManager.LoadScene("Fase" + (level+1) + "_ETM");
     }
 
     void OnCollisionExit2D(Collision2D collision2D)
@@ -130,17 +137,49 @@ public class Player : MonoBehaviour
 		// Mata o personagem em itens de InstaDeath
 		if (collider2D.gameObject.CompareTag("InstaDeath"))
             instaDeath();
+		
         
 	}
 	
 	// Função para matar um personagem instantâneamente
 	void instaDeath(){
+		Instantiate(sangue, transform.position, Quaternion.identity);
+		ShakeIt();
 		numVidas = 0;
         txtVidas.text = numVidas.ToString();
         GetComponent<Animator>().SetTrigger("Morreu");
         morto = true;
         gameOver.SetActive(true);
+		
 	}	
+	
+	
+	// Camera
+	
+	Vector3 cameraInitialPosition;
+	public float shakeMagnitude = 0.05f, shakeTime = 0.5f;
+	public Camera mainCamera;
+	
+	public void ShakeIt(){
+		cameraInitialPosition = mainCamera.transform.position;
+		InvokeRepeating("StartCameraShaking", 0f, 0.005f);
+		Invoke("StopCameraShaking", shakeTime);
+	}
+	
+	void StartCameraShaking(){
+		
+		float cameraShakingOffsetX = Random.value * shakeMagnitude * 2 - shakeMagnitude;
+		float cameraShakingOffsetY = Random.value * shakeMagnitude * 2 - shakeMagnitude;
+		Vector3 cameraIntermidiatePosition = mainCamera.transform.position;
+		cameraIntermidiatePosition.x += cameraShakingOffsetX;
+		cameraIntermidiatePosition.y += cameraShakingOffsetY;
+		mainCamera.transform.position = cameraIntermidiatePosition;
+	}
+	
+	void StopCameraShaking(){
+		CancelInvoke("StartCameraShaking");
+		mainCamera.transform.position = cameraInitialPosition;
+	}
 }
 
 
