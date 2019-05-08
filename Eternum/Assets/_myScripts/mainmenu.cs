@@ -7,7 +7,7 @@ public class mainmenu : MonoBehaviour
 {
     public void NewGameButton()
     {
-        SceneManager.LoadScene("Fase1_ETM");
+        SceneManager.LoadScene("Fase1_Story");
     }
 
     public void Quit()

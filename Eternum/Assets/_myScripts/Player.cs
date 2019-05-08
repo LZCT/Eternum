@@ -115,7 +115,7 @@ public class Player : MonoBehaviour
         if (collision2D.gameObject.CompareTag("InstaDeath"))
              instaDeath();
 		 if (collision2D.gameObject.CompareTag("Portal"))
-            SceneManager.LoadScene("Fase" + (level+1) + "_ETM");
+            SceneManager.LoadScene("Fase" + (level+1) + "_Story");
     }
 
     void OnCollisionExit2D(Collision2D collision2D)

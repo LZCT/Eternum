@@ -45,6 +45,12 @@ public class GameManager : MonoBehaviour
             
 
     }
+	
+	public void loadScene()
+	{
+		SceneManager.LoadScene("Fase" + level + "_ETM");
+	}
+	
 
     public void Resume()
     {
