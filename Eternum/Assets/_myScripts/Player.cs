@@ -8,9 +8,17 @@ public class Player : MonoBehaviour
 {
     public GameObject gameOver;
 	public GameObject MenuPauseCompleto;
+	public Image imageCooldown;
     public bool noChao;
 	public GameObject sangue;
 	public int level;
+	public float cooldownTime = 0.5f;
+	
+	// Variavel Som
+	private AudioSource[] soundsPlayer;
+	
+	// Variavel Cooldown
+	private bool cooldown = false;
 	
 	// Variaveis - Movimentação
     public float forcaPulo;
@@ -33,6 +41,7 @@ public class Player : MonoBehaviour
         txtVidas.text = numVidas.ToString();
 		txtCoins.text = coins.ToString();
         morto = false;
+		soundsPlayer = GetComponents<AudioSource>();
     }
 
     // Update is called once per frame
@@ -40,6 +49,9 @@ public class Player : MonoBehaviour
     {
 		if (!morto && !MenuPauseCompleto.activeInHierarchy)
         {       
+			if(cooldown){
+				imageCooldown.fillAmount += 1 / cooldownTime * Time.deltaTime;
+			}
 			// Movimento
 			Rigidbody2D rigBody = GetComponent<Rigidbody2D>();
 			float movimento = Input.GetAxis("Horizontal");
@@ -65,28 +77,40 @@ public class Player : MonoBehaviour
 			
 			// Ataque
 			if(Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.K)){
-				GetComponent<Animator>().SetTrigger("Atacando");
-				Collider2D[] colliders = new Collider2D[3];
-				if(GetComponent<SpriteRenderer>().flipX == true){
-					transform.Find("EspadaArea_L").gameObject.GetComponent<Collider2D>().OverlapCollider(new ContactFilter2D(), colliders);	
-				}else
-					transform.Find("EspadaArea_R").gameObject.GetComponent<Collider2D>().OverlapCollider(new ContactFilter2D(), colliders);	
-				
-				for(int i=0; i < colliders.Length; i++){
-							if(colliders[i]!=null && colliders[i].gameObject.CompareTag("Enemies")){
-								Instantiate(sangue, transform.position, Quaternion.identity);
-								Destroy(colliders[i].gameObject);
-								score += 100;
-								txtScore.text = score.ToString();
-								
-							}
+				if ( cooldown == false ){
+					GetComponent<Animator>().SetTrigger("Atacando");
+					soundsPlayer[0].Play();
+					Collider2D[] colliders = new Collider2D[3];
+					
+					if(GetComponent<SpriteRenderer>().flipX == true)
+						transform.Find("EspadaArea_L").gameObject.GetComponent<Collider2D>().OverlapCollider(new ContactFilter2D(), colliders);	
+					else
+						transform.Find("EspadaArea_R").gameObject.GetComponent<Collider2D>().OverlapCollider(new ContactFilter2D(), colliders);	
+					
+					for(int i=0; i < colliders.Length; i++){
+								if(colliders[i]!=null && colliders[i].gameObject.CompareTag("Enemies")){
+									Instantiate(sangue, transform.position, Quaternion.identity);
+									Destroy(colliders[i].gameObject);
+									score += 100;
+									txtScore.text = score.ToString();
+									
+								}
+					}
+						Invoke("ResetCooldown",cooldownTime);
+						cooldown = true;
+					}
+					
 				}
-			}
 			
 			
 		}
     }
-
+	// Cooldown Attack
+	void ResetCooldown(){
+		cooldown = false;
+		imageCooldown.fillAmount = 0;
+	}
+ 
     void OnCollisionEnter2D(Collision2D collision2D)
     {
 		// Verifica se está no chão
@@ -107,6 +131,7 @@ public class Player : MonoBehaviour
                     GetComponent<Animator>().SetTrigger("Morreu");
                     morto = true;
                     gameOver.SetActive(true);
+					soundsPlayer[0].Play();
 
                 }
             }
@@ -133,6 +158,7 @@ public class Player : MonoBehaviour
 			coins++;
 			txtScore.text = score.ToString();
 			txtCoins.text = coins.ToString();
+			soundsPlayer[1].Play();
 		}
 		// Mata o personagem em itens de InstaDeath
 		if (collider2D.gameObject.CompareTag("InstaDeath"))
@@ -150,7 +176,7 @@ public class Player : MonoBehaviour
         GetComponent<Animator>().SetTrigger("Morreu");
         morto = true;
         gameOver.SetActive(true);
-		
+		gameOver.GetComponent<AudioSource>().Play();
 	}	
 	
 	
