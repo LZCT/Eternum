@@ -89,6 +89,7 @@ public class Player : MonoBehaviour
 					
 					for(int i=0; i < colliders.Length; i++){
 								if(colliders[i]!=null && colliders[i].gameObject.CompareTag("Enemies")){
+									soundsPlayer[5].Play();
 									Instantiate(sangue, transform.position, Quaternion.identity);
 									Destroy(colliders[i].gameObject);
 									score += 100;
@@ -122,6 +123,7 @@ public class Player : MonoBehaviour
 			ShakeIt();
             if(numVidas > 0)
             {
+				soundsPlayer[4].Play();
                 numVidas--;
                 txtVidas.text = numVidas.ToString();
 				GetComponent<Animator>().SetTrigger("Hit");
@@ -131,7 +133,8 @@ public class Player : MonoBehaviour
                     GetComponent<Animator>().SetTrigger("Morreu");
                     morto = true;
                     gameOver.SetActive(true);
-					soundsPlayer[0].Play();
+					soundsPlayer[2].Stop();
+					soundsPlayer[3].Play();
 
                 }
             }
@@ -177,6 +180,9 @@ public class Player : MonoBehaviour
         morto = true;
         gameOver.SetActive(true);
 		gameOver.GetComponent<AudioSource>().Play();
+		soundsPlayer[2].Stop();
+		soundsPlayer[3].Play();
+		soundsPlayer[5].Play();
 	}	
 	
 	
