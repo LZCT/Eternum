@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
 	public GameObject sangue;
 	public int level;
 	public float cooldownTime = 0.5f;
+	public Transform targetBoss;
 	
 	// Variavel Som
 	private AudioSource[] soundsPlayer;
@@ -33,6 +34,7 @@ public class Player : MonoBehaviour
     public Text txtScore;
 	public Text txtCoins;
     public bool morto;
+	
 	
     // Start is called before the first frame update
     void Start()
@@ -75,6 +77,11 @@ public class Player : MonoBehaviour
 			}else
 				GetComponent<Animator>().SetBool("Andando", false);
 			
+			//Taunt
+			if(Input.GetKeyDown(KeyCode.T)){
+				soundsPlayer[6].Play();
+			}
+			
 			// Ataque
 			if(Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.K)){
 				if ( cooldown == false ){
@@ -96,12 +103,18 @@ public class Player : MonoBehaviour
 									txtScore.text = score.ToString();
 									
 								}
+								if(colliders[i]!=null && colliders[i].gameObject.CompareTag("Boss")){
+									soundsPlayer[5].Play();
+									Instantiate(sangue, transform.position, Quaternion.identity);
+									targetBoss.SendMessage("TakeDamageBoss");
+
+								}
 					}
 						Invoke("ResetCooldown",cooldownTime);
 						cooldown = true;
-					}
-					
 				}
+					
+			}
 			
 			
 		}
@@ -111,7 +124,20 @@ public class Player : MonoBehaviour
 		cooldown = false;
 		imageCooldown.fillAmount = 0;
 	}
- 
+	
+	public void TakeDamage(){
+		ShakeIt();
+           // if(numVidas > 0)
+           // {
+			
+				soundsPlayer[4].Play();
+                numVidas--;
+                txtVidas.text = numVidas.ToString();
+				GetComponent<Animator>().SetTrigger("Hit");
+				Debug.Log("HIT");
+               
+		//}
+	}
     void OnCollisionEnter2D(Collision2D collision2D)
     {
 		// Verifica se está no chão
@@ -139,6 +165,8 @@ public class Player : MonoBehaviour
                 }
             }
         }
+		
+		
 		// Mata o personagem em itens de InstaDeath
         if (collision2D.gameObject.CompareTag("InstaDeath"))
              instaDeath();
@@ -166,7 +194,29 @@ public class Player : MonoBehaviour
 		// Mata o personagem em itens de InstaDeath
 		if (collider2D.gameObject.CompareTag("InstaDeath"))
             instaDeath();
-		
+		/*
+		if (collider2D.gameObject.CompareTag("BossHit"))
+        {
+			GetComponent<Rigidbody2D>().AddForce(transform.up * 10 + transform.right * 300);
+			ShakeIt();
+            if(numVidas > 0)
+            {
+				soundsPlayer[4].Play();
+                numVidas--;
+                txtVidas.text = numVidas.ToString();
+				GetComponent<Animator>().SetTrigger("Hit");
+                if (numVidas == 0)
+                {
+					Instantiate(sangue, transform.position, Quaternion.identity);
+                    GetComponent<Animator>().SetTrigger("Morreu");
+                    morto = true;
+                    gameOver.SetActive(true);
+					soundsPlayer[2].Stop();
+					soundsPlayer[3].Play();
+
+                }
+            }
+        }*/
         
 	}
 	

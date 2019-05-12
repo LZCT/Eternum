@@ -6,12 +6,15 @@ using UnityEngine.UI;
 public class HorizontalEnemies : MonoBehaviour
 {
 	//private bool colisao = false;
+	public GameObject player;
 	public float moveSpeed = 2f;
 	Transform Detector_L, Detector_R;
 	Vector3 localScale;
 	bool movingRight = true;
 	Rigidbody2D rb;
 	public string idEnemy = "";
+	
+	private AudioSource[] soundsPlayer;
 	
 	
     // Start is called before the first frame update
@@ -21,11 +24,13 @@ public class HorizontalEnemies : MonoBehaviour
 		rb = GetComponent<Rigidbody2D>();
 		Detector_L = GameObject.Find("Detector_L_" + idEnemy).GetComponent<Transform>();
 		Detector_R = GameObject.Find("Detector_R_" + idEnemy).GetComponent<Transform>();
+		soundsPlayer = GetComponents<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
+		
         if(transform.position.x > Detector_R.position.x)
 			movingRight = false;
 		if(transform.position.x < Detector_L.position.x)
