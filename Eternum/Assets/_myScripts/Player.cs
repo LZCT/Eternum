@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     public GameObject gameOver;
+	public GameObject save;
 	public GameObject MenuPauseCompleto;
 	public Image imageCooldown;
     public bool noChao;
@@ -14,6 +15,7 @@ public class Player : MonoBehaviour
 	public int level;
 	public float cooldownTime = 0.5f;
 	public Transform targetBoss;
+	
 	
 	// Variavel Som
 	private AudioSource[] soundsPlayer;
@@ -170,8 +172,22 @@ public class Player : MonoBehaviour
 		// Mata o personagem em itens de InstaDeath
         if (collision2D.gameObject.CompareTag("InstaDeath"))
              instaDeath();
-		 if (collision2D.gameObject.CompareTag("Portal"))
-            SceneManager.LoadScene("Fase" + (level+1) + "_Story");
+		 if (collision2D.gameObject.CompareTag("Portal")){
+			save.SendMessage("save", 2);
+			if(level == 1)
+				save.SendMessage("saveScoreValueL1", score);
+			else
+				if(level == 2){
+					save.SendMessage("saveScoreValueL2", score);
+					save.SendMessage("saveHighScore");
+				}
+					
+			if(level < 3)
+				SceneManager.LoadScene("Fase" + (level+1) + "_Story");
+			
+			
+		 }
+            
     }
 
     void OnCollisionExit2D(Collision2D collision2D)
