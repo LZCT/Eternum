@@ -47,7 +47,7 @@ public class Boss : MonoBehaviour {
 		healthBar.value = health;
 		
 		
-		if(BossState){
+		if(BossState && !isDead){
 			if(transform.position.x > Detector_R.position.x)
 				movingRight = false;
 			if(transform.position.x < Detector_L.position.x)
@@ -66,7 +66,7 @@ public class Boss : MonoBehaviour {
 					countAttack++;
 					// ADICIONAR IMPULSO AO HITAR O PLAYER
 					// VERIFICAR SPRITES
-					//target.GetComponent<Rigidbody2D>().AddForce( new Vector2(5,5), ForceMode2D.Impulse);
+					
 					outInDistance = true;
 					if(countAttack == 5){
 						anim.SetTrigger("sit");
@@ -80,6 +80,7 @@ public class Boss : MonoBehaviour {
 			if(distanceToPlayer < attackRangeDamage){
 				if(!outInDistanceDamage){
 					outInDistanceDamage = true;
+					//target.GetComponent<Rigidbody2D>().AddForce( new Vector2(50,10), ForceMode2D.Impulse);
 					target.SendMessage("TakeDamage");
 				}
 			}else
@@ -98,7 +99,7 @@ public class Boss : MonoBehaviour {
 				health -= 3;
 			else{
 				anim.SetTrigger("death");
-				changeState();
+				//changeState();
 				isDead = true;
 			}
 			Debug.Log("HITPLAYER");
