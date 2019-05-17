@@ -60,6 +60,7 @@ public class Player : MonoBehaviour
 			Rigidbody2D rigBody = GetComponent<Rigidbody2D>();
 			float movimento = Input.GetAxis("Horizontal");
 			rigBody.velocity = new Vector2(movimento*velocidadeMaxima, rigBody.velocity.y);
+			
 			if(movimento < 0)
 				GetComponent<SpriteRenderer>().flipX = true;
 			else
@@ -82,6 +83,11 @@ public class Player : MonoBehaviour
 			//Taunt
 			if(Input.GetKeyDown(KeyCode.T)){
 				soundsPlayer[6].Play();
+			}
+			
+			if(Input.GetKeyDown(KeyCode.R)){
+				//rigBody.velocity = new Vector2(0f, 0f);
+				//rigBody.AddForce( new Vector2(500,0), ForceMode2D.Impulse);
 			}
 			
 			// Ataque
@@ -127,11 +133,16 @@ public class Player : MonoBehaviour
 		imageCooldown.fillAmount = 0;
 	}
 	
+	// Dano do Boss
 	public void TakeDamage(){
 		ShakeIt();
            // if(numVidas > 0)
            // {
-			
+			   
+				Rigidbody2D rigBody = GetComponent<Rigidbody2D>();
+				//rigBody.velocity = new Vector2(50f, 0f);
+				//rigBody.AddForce( new Vector2(300,2), ForceMode2D.Impulse);
+				
 				soundsPlayer[4].Play();
                 numVidas--;
                 txtVidas.text = numVidas.ToString();

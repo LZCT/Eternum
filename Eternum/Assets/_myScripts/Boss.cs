@@ -79,8 +79,9 @@ public class Boss : MonoBehaviour {
 			
 			if(distanceToPlayer < attackRangeDamage){
 				if(!outInDistanceDamage){
+					anim.SetTrigger("attack");
 					outInDistanceDamage = true;
-					//target.GetComponent<Rigidbody2D>().AddForce( new Vector2(50,10), ForceMode2D.Impulse);
+					//target.GetComponent<Rigidbody2D>().AddForce( new Vector2(-70,20), ForceMode2D.Impulse);
 					target.SendMessage("TakeDamage");
 				}
 			}else
@@ -94,7 +95,7 @@ public class Boss : MonoBehaviour {
 	}
 	//transform.up* 500 + transform.right * 2000
 	public void TakeDamageBoss(){
-		if(!isDead){
+		if(!isDead && !BossState){
 			if(health > 0)
 				health -= 3;
 			else{

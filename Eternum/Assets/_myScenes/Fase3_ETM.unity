@@ -10311,7 +10311,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 15.62, y: 11.39}
+    oldSize: {x: 8.77, y: 11.63}
     newSize: {x: 8.77, y: 11.63}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -24822,7 +24822,7 @@ CompositeCollider2D:
   m_GameObject: {fileID: 782122473}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 047cc68b399a4fa46acb5b3053a3e548, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -44040,7 +44040,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 047cc68b399a4fa46acb5b3053a3e548, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -44948,6 +44948,15 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: cd866ed6afc5c4a4d9e35c4c09594ff5, type: 3}
+    - target: {fileID: 768688669, guid: 4fb4d191d9975a94eb33e95e4851cc2d, type: 3}
+      propertyPath: m_Volume
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4330202414465597720, guid: 4fb4d191d9975a94eb33e95e4851cc2d,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 047cc68b399a4fa46acb5b3053a3e548, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fb4d191d9975a94eb33e95e4851cc2d, type: 3}
 --- !u!1 &1862826835
