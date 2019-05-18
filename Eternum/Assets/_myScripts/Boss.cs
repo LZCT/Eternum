@@ -13,13 +13,17 @@ public class Boss : MonoBehaviour {
 	bool movingRight = true;
 	Rigidbody2D rb;
 	public Transform target;
-	public GameObject sangue;
+	public GameObject sangueBoss;
+	public GameObject fumaca;
 	public Slider healthBar;
+	public Text txtScore;
+	public int score = 0;
 	
 	// Status Boss
 	private bool outInDistanceDamage;
 	private bool outInDistance;
 	public float health;
+	
 	private float attackRange=4;
 	private float attackRangeDamage= 3;
 	private float countAttack = 0;
@@ -29,6 +33,7 @@ public class Boss : MonoBehaviour {
 	
 	 private void Start()
     {
+		txtScore.text = score.ToString();
 		BossState = true;
 		health = 50;
 		isDead = false;
@@ -69,6 +74,7 @@ public class Boss : MonoBehaviour {
 					
 					outInDistance = true;
 					if(countAttack == 5){
+						Instantiate(fumaca, transform.position, Quaternion.identity);
 						anim.SetTrigger("sit");
 						BossState = false;
 						Invoke("ResetCooldown",cooldownTime);
@@ -96,11 +102,16 @@ public class Boss : MonoBehaviour {
 	//transform.up* 500 + transform.right * 2000
 	public void TakeDamageBoss(){
 		if(!isDead && !BossState){
+			Instantiate(sangueBoss, transform.position, Quaternion.identity);
 			if(health > 0)
 				health -= 3;
 			else{
 				anim.SetTrigger("death");
 				//changeState();
+				target.SendMessage("BossMorto");
+				score += 5000;
+				txtScore.text = score.ToString();
+				Instantiate(fumaca, transform.position, Quaternion.identity);
 				isDead = true;
 			}
 			Debug.Log("HITPLAYER");
@@ -131,59 +142,7 @@ public class Boss : MonoBehaviour {
 		if(localScale.x > 0)
 			localScale.x = -localScale.x;
 		transform.localScale = localScale;
-		rb.velocity = new Vector2(0, rb.velocity.y);
+		rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
 	}	
-	/*
-	public void TakeDamage(int damage){
-		health -= damage;
-		if(health <= 0){
-			Debug.Log("Dead");
-		}
-	}
 	
-
-    public int health;
-    public int damage;
-    private float timeBtwDamage = 1.5f;
-
-
-    public Animator camAnim;
-    public Slider healthBar;
-    private Animator anim;
-    public bool isDead;
-
-    private void Start()
-    {
-        anim = GetComponent<Animator>();
-    }
-
-    private void Update()
-    {
-
-        if (health <= 25) {
-            anim.SetTrigger("stageTwo");
-        }
-
-        if (health <= 0) {
-            anim.SetTrigger("death");
-        }
-
-        // give the player some time to recover before taking more damage !
-        if (timeBtwDamage > 0) {
-            timeBtwDamage -= Time.deltaTime;
-        }
-
-        healthBar.value = health;
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        // deal the player damage ! 
-        if (other.CompareTag("Player") && isDead == false) {
-            if (timeBtwDamage <= 0) {
-                camAnim.SetTrigger("shake");
-                other.GetComponent<Player>().health -= damage;
-            }
-        } 
-    }*/
 }

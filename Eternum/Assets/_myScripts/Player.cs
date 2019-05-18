@@ -113,8 +113,9 @@ public class Player : MonoBehaviour
 								}
 								if(colliders[i]!=null && colliders[i].gameObject.CompareTag("Boss")){
 									soundsPlayer[5].Play();
-									Instantiate(sangue, transform.position, Quaternion.identity);
+									//Instantiate(sangue, transform.position, Quaternion.identity);
 									targetBoss.SendMessage("TakeDamageBoss");
+									
 
 								}
 					}
@@ -133,24 +134,35 @@ public class Player : MonoBehaviour
 		imageCooldown.fillAmount = 0;
 	}
 	
+	// Boss Morto
+	void BossMorto(){
+		save.SendMessage("saveHighScore");
+	}
+	
 	// Dano do Boss
 	public void TakeDamage(){
 		ShakeIt();
-           // if(numVidas > 0)
-           // {
-			   
-				Rigidbody2D rigBody = GetComponent<Rigidbody2D>();
-				//rigBody.velocity = new Vector2(50f, 0f);
-				//rigBody.AddForce( new Vector2(300,2), ForceMode2D.Impulse);
-				
-				soundsPlayer[4].Play();
-                numVidas--;
-                txtVidas.text = numVidas.ToString();
-				GetComponent<Animator>().SetTrigger("Hit");
-				Debug.Log("HIT");
-               
-		//}
+        if(numVidas > 0){
+			//Rigidbody2D rigBody = GetComponent<Rigidbody2D>();
+			//rigBody.velocity = new Vector2(50f, 0f);
+			//rigBody.AddForce( new Vector2(300,10), ForceMode2D.Impulse);
+			Instantiate(sangue, transform.position, Quaternion.identity);
+			soundsPlayer[4].Play();
+            numVidas--;
+            txtVidas.text = numVidas.ToString();
+			GetComponent<Animator>().SetTrigger("Hit");
+			Debug.Log("HIT");
+			if (numVidas == 0){
+				Instantiate(sangue, transform.position, Quaternion.identity);
+                GetComponent<Animator>().SetTrigger("Morreu");
+                morto = true;
+				gameOver.SetActive(true);
+				soundsPlayer[2].Stop();
+				soundsPlayer[3].Play();
+			}
+		}
 	}
+	
     void OnCollisionEnter2D(Collision2D collision2D)
     {
 		// Verifica se está no chão
@@ -190,7 +202,7 @@ public class Player : MonoBehaviour
 			else
 				if(level == 2){
 					save.SendMessage("saveScoreValueL2", score);
-					save.SendMessage("saveHighScore");
+					//save.SendMessage("saveHighScore");
 				}
 					
 			if(level < 3)
@@ -221,30 +233,7 @@ public class Player : MonoBehaviour
 		// Mata o personagem em itens de InstaDeath
 		if (collider2D.gameObject.CompareTag("InstaDeath"))
             instaDeath();
-		/*
-		if (collider2D.gameObject.CompareTag("BossHit"))
-        {
-			GetComponent<Rigidbody2D>().AddForce(transform.up * 10 + transform.right * 300);
-			ShakeIt();
-            if(numVidas > 0)
-            {
-				soundsPlayer[4].Play();
-                numVidas--;
-                txtVidas.text = numVidas.ToString();
-				GetComponent<Animator>().SetTrigger("Hit");
-                if (numVidas == 0)
-                {
-					Instantiate(sangue, transform.position, Quaternion.identity);
-                    GetComponent<Animator>().SetTrigger("Morreu");
-                    morto = true;
-                    gameOver.SetActive(true);
-					soundsPlayer[2].Stop();
-					soundsPlayer[3].Play();
-
-                }
-            }
-        }*/
-        
+		        
 	}
 	
 	// Função para matar um personagem instantâneamente

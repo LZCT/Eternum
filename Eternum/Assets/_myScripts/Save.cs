@@ -36,7 +36,7 @@ public class Save : MonoBehaviour
 		Debug.Log("LoadL1: " + scoreValueL1);
 		scoreValueL2 = PlayerPrefs.GetInt("scoreValueL2",0);
 		Debug.Log("LoadL2: " + scoreValueL2);
-		totalScore = scoreValueL1 + scoreValueL2 + 1000;
+		totalScore = scoreValueL1 + scoreValueL2 + 5000;
 		if(highSCoreValue < totalScore)
 			highSCoreValue = totalScore;
 		PlayerPrefs.SetInt("highSCoreValue", highSCoreValue);
