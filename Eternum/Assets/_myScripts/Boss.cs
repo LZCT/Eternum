@@ -15,6 +15,7 @@ public class Boss : MonoBehaviour {
 	public Transform target;
 	public GameObject sangueBoss;
 	public GameObject fumaca;
+	public GameObject AdamClone;
 	public Slider healthBar;
 	public Text txtScore;
 	public int score = 0;
@@ -99,6 +100,12 @@ public class Boss : MonoBehaviour {
 		
 		
 	}
+	
+	void Adamastor(){
+		Instantiate(fumaca, transform.position, Quaternion.identity);
+		AdamClone.SetActive(true);
+	}
+	
 	//transform.up* 500 + transform.right * 2000
 	public void TakeDamageBoss(){
 		if(!isDead && !BossState){
@@ -109,6 +116,7 @@ public class Boss : MonoBehaviour {
 				anim.SetTrigger("death");
 				//changeState();
 				target.SendMessage("BossMorto");
+				Invoke("Adamastor",2.0f);
 				score += 5000;
 				txtScore.text = score.ToString();
 				Instantiate(fumaca, transform.position, Quaternion.identity);

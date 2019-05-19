@@ -6,17 +6,27 @@ using UnityEngine.SceneManagement;
 public class mainmenu : MonoBehaviour
 {
 	public GameObject save;
-	
+	public GameObject noSaveGame;
+	public GameObject newGame;
 	
     public void NewGameButton()
     {
-        SceneManager.LoadScene("Fase1_Story");
-		save.SendMessage("delete");
+		if(PlayerPrefs.HasKey("Level")){
+			newGame.SetActive(true);
+			Debug.Log("entro");
+		}else{
+			SceneManager.LoadScene("Fase1_Story");
+			save.SendMessage("delete");
+		}
+        
     }
 	
 	public void LoadGame()
     {
-        save.SendMessage("load");
+		if(PlayerPrefs.HasKey("Level")){
+			save.SendMessage("load");
+		}else
+			noSaveGame.SetActive(true);
 		
     }
 
@@ -24,6 +34,19 @@ public class mainmenu : MonoBehaviour
     {
         Application.Quit();
 
+    }
+	
+	public void Ok(){
+		noSaveGame.SetActive(false);
+    }
+	
+	public void Yes(){
+		SceneManager.LoadScene("Fase1_Story");
+		save.SendMessage("delete");
+    }
+	
+	public void No(){
+		newGame.SetActive(false);
     }
 
 }

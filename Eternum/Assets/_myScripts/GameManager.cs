@@ -48,7 +48,10 @@ public class GameManager : MonoBehaviour
 	
 	public void loadScene()
 	{
-		SceneManager.LoadScene("Fase" + level + "_ETM");
+		if(level == 4)
+			SceneManager.LoadScene("Menu");
+		else
+			SceneManager.LoadScene("Fase" + level + "_ETM");
 	}
 	
 

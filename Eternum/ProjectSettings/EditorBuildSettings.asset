@@ -6,24 +6,30 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/_myScenes/Intro.unity
+    guid: aa3c5956f5e32f5428ff41a0ff9c3129
+  - enabled: 1
     path: Assets/_myScenes/Menu.unity
     guid: bd4d9b2c927797b48908ed51eeca2a82
-  - enabled: 1
-    path: Assets/_myScenes/Fase1_ETM.unity
-    guid: d7155237cf6678742839d9827ba9c9c9
-  - enabled: 1
-    path: Assets/_myScenes/Fase2_ETM.unity
-    guid: 8f06bd59568e5da408c8b0cb65aff78d
-  - enabled: 1
-    path: Assets/_myScenes/Fase3_ETM.unity
-    guid: b42739c1e78434449baa7bf9b7a6059f
   - enabled: 1
     path: Assets/_myScenes/Fase1_Story.unity
     guid: f7b2c28c3e09032488e36aa6f2f18cad
   - enabled: 1
+    path: Assets/_myScenes/Fase1_ETM.unity
+    guid: d7155237cf6678742839d9827ba9c9c9
+  - enabled: 1
     path: Assets/_myScenes/Fase2_Story.unity
     guid: 1cbf99db3553f7b4c9e564fa9d3d70d3
   - enabled: 1
+    path: Assets/_myScenes/Fase2_ETM.unity
+    guid: 8f06bd59568e5da408c8b0cb65aff78d
+  - enabled: 1
     path: Assets/_myScenes/Fase3_Story.unity
     guid: 43123f8350bde844ea50da2502abefab
+  - enabled: 1
+    path: Assets/_myScenes/Fase3_ETM.unity
+    guid: b42739c1e78434449baa7bf9b7a6059f
+  - enabled: 1
+    path: Assets/_myScenes/Fase4_Story.unity
+    guid: 90b30a02fc3529c4e9dd30de642ba7df
   m_configObjects: {}

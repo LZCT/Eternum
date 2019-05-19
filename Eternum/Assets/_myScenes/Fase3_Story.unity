@@ -176,7 +176,9 @@ MonoBehaviour:
     Or are all the books wrong and you're responsible for the death of more than 100
     million people?\r\n\r\nStrange ... You do not seem to be the hero of this story
     anymore...\r\n\r\nAnyway... Your time machine took you to the right place this
-    time.\r\n\r\nDo something useful and defeat Adamastor before it's too late!"
+    time.\r\n\r\nDo something useful and defeat Adamastor before it's too late!\n\nBe
+    careful! His time machine is a giant robot, try to dodge his blows and hit him
+    when he's vulnerable!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 26d5cb50d38a58947af93cb91e0342d9, type: 2}
   m_sharedMaterial: {fileID: 21670327272736710, guid: 26d5cb50d38a58947af93cb91e0342d9,
@@ -205,7 +207,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 41.1
+  m_fontSize: 40.2
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -243,15 +245,15 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: -7.7254076, z: -73.81473, w: -39.684223}
+  m_margin: {x: 0, y: -7.7254076, z: -73.81473, w: -115.368835}
   m_textInfo:
     textComponent: {fileID: 128590610}
-    characterCount: 532
+    characterCount: 637
     spriteCount: 0
-    spaceCount: 101
-    wordCount: 95
+    spaceCount: 122
+    wordCount: 115
     linkCount: 0
-    lineCount: 11
+    lineCount: 13
     pageCount: 1
     materialCount: 1
   m_havePropertiesChanged: 0

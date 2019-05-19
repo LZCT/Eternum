@@ -134,9 +134,23 @@ public class Player : MonoBehaviour
 		imageCooldown.fillAmount = 0;
 	}
 	
+	void final(){
+		 SceneManager.LoadScene("Fase4_Story");
+	}
+	
+	void dieFinal(){
+		Instantiate(sangue, transform.position, Quaternion.identity);
+        GetComponent<Animator>().SetTrigger("Morreu");
+		Invoke("final",10.0f);
+	}
+	
 	// Boss Morto
 	void BossMorto(){
+		morto = true;
 		save.SendMessage("saveHighScore");
+		
+		Invoke("dieFinal",5.0f);
+		
 	}
 	
 	// Dano do Boss
@@ -196,7 +210,7 @@ public class Player : MonoBehaviour
         if (collision2D.gameObject.CompareTag("InstaDeath"))
              instaDeath();
 		 if (collision2D.gameObject.CompareTag("Portal")){
-			save.SendMessage("save", 2);
+			save.SendMessage("save", level+1);
 			if(level == 1)
 				save.SendMessage("saveScoreValueL1", score);
 			else
