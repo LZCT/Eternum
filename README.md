@@ -1,10 +1,7 @@
-#Eternum Game
+# Eternum Game
 
 ![](https://i.imgur.com/qHHkRzy.png)
 
-**Table of Contents**
-
-[TOC]
 
 This is a demo version of Eternum Game, its only purpose is to demonstrate how a basic 2D game works.
 
@@ -24,15 +21,15 @@ In Build Settings, select your target platform and architecture. Build it!
 | P | Pause  |
 
 # Game Structure
-### Controls
+### 1. Controls
 The player controls Aeon, the protagonist, through a side representation. The character can be freely controlled over the scenario, dodging obstacles and facing enemies of different types.
 
 Each stage of the game refers to a different era of the world, starting in the Paleolithic period, passing through the Medieval Era and reaching the present time.
 
-### Life Points
+### 2. Life Points
 The player has a total of three life points per stage that cannot be acquired during the level. A life point is reduced if the character is hit by an enemy. When losing a life point, the character continues normally where he left off, and can be attacked again, resulting in the loss of another life point. If the player loses all three life points, the game is over and a game over screen is displayed, returning to the start menu. Certain obstacles such as fire or lava cause an instant kill, resulting in game over.
 
-### Score
+### 3. Score
 The game score is obtained by destroying enemies and picking up the collectibles available through the level. For each enemy defeated, the player receives 100 points. Each collectible obtained results in 25 points each. Scoring allows the player to complete the level several times, always seeking a higher score.
 
  The intention of the score is to allow the player to carry out the level in different ways, trying to face as many enemies as possible and collect as many items as possible, trying to get a high score.
