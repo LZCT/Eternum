@@ -1,0 +1,27 @@
+ETERNUM
+
+The demo version of Eternum is now available!
+This is a demo version of Eternum, its only purpose is to demonstrate how a basic 2D game works.
+
+To test the game, open the project in Unity and click File > Build Settings.
+In Build Settings, select your target platform and architecture. Build it!
+
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+GAME MANUAL - CONTROLS
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+D - Moves the character towards the right of the screen.
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+A - Moves the character towards the left of the screen.
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+Space - Character jump
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+Left Mouse Button - Character attack
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+P - Pause
+––––––––––––––––––––––––––––––––––––––––––––––––––––––––– 
+
+OBJECTIVE
+The player aims to progress each stage to the end in the way he sees fit.
+Touching enemies reduces one life, if the player loses three lives, the game is over.
+Certain map items such as fire kills the character instantly, be careful!
+REMEMBER: The greed that moves you is the same that kills you!
